@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title">Cadastrar Produto</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input type="hidden" name="id" [(ngModel)]="product.id"/>
+    <label for="">Nome</label>
+    <input type="text" name="name" class="form-control rounded-0" [(ngModel)]="product.name" required />
+  </div>
+  <label for="">Descrição</label>
+  <input
+    type="text"
+    name="description"
+    class="form-control rounded-0"
+    [(ngModel)]="product.description"
+    required
+  />
+  <label for="price">Preço</label>
+  <input
+    type="text"
+    name="price"
+    class="form-control rounded-0"
+    required
+    [(ngModel)]="product.price"
+  />
+  <br />
+  <label for="">Foto</label>
+  <input
+    type="file"
+    name="imgUrl"
+    accept="Imagem"
+    class="form-control rounded-0"
+    required
+  />
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="saveProduct()">
+    Salvar
+  </button>
+</div>

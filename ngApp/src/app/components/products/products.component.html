@@ -1,0 +1,38 @@
+<div class="row mt-5">
+  <div class="col-md-4 mb-3" *ngFor="let product of products">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card title">{{ product.name }}</h5>
+        <img style="width: 120px" src="{{ product.imgUrl }}" />
+        <p class="card-text">{{ product.description }}</p>
+        <h6>{{ product.price | currency : "R$" }}</h6>
+        <button
+          class="btn btn-success"
+          (click)="addToCart(product)"
+          [hidden]="isAdmin"
+        >
+          Adicionar ao Carrinho
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="deleteProduct(product)"
+          [hidden]="!isAdmin || product.system"
+        >
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="col-md-4 mb-3" *ngIf="isAdmin">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card title">Novo Produto</h5>
+        <button class="btn btn-success" (click)="newProduct()">
+          Cadastrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

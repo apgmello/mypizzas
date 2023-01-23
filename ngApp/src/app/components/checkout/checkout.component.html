@@ -1,0 +1,14 @@
+<br>
+<div class="row card">
+  <div class="col">
+    <h5 class="title text-center">
+        <i class="fa fa-gears"></i>
+        Tela de Pagamento
+        <i class="fa fa-gears"></i>
+    </h5>
+  </div>
+</div>
+<br>
+<div class="text-center">
+    <button [swal]="['Pagamento efetuado com sucesso!','','success']"  class="btn btn-success" (confirm)="checkout()">Efetuar Pagamento</button>
+</div>

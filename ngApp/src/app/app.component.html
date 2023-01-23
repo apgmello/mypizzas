@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="cursor:pointer" (click)="navigate('')"> 🍕 My Pizzas</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" style="cursor:pointer" (click)="navigate('products')">Produtos</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" style="cursor:pointer" (click)="navigate('users')">Usuários</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav">
+      <a class="nav-link" style="cursor:pointer" (click)="navigate('cart')" alt="carrinho" >
+        <i class="nav-brand fa fa-shopping-cart" style="font-size:1.5em !important;" *ngIf="!isAdmin" ></i>
+        <span class="badge rounded-pill badge-notification bg-danger" *ngIf="itemsInCart>0 && !isAdmin" style="padding:0.15em 0.4em!important;position: absolute;">{{itemsInCart}}</span>
+      </a>&nbsp;&nbsp;&nbsp;
+      <a class="nav-link" style="cursor:pointer" *ngIf="loggedIn" (click)="logout()">Logout</a>    
+      <a class="nav-link" style="cursor:pointer" *ngIf="!loggedIn" (click)="login()">Login</a>    
+    </ul>
+  </div>
+</nav>    
+<div class="container">
+  <router-outlet></router-outlet>            
+</div>

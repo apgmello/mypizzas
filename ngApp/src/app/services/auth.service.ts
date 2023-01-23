@@ -34,6 +34,7 @@ export class AuthService {
   }
 
   logoutUser() {
+    sessionStorage.clear();
     localStorage.clear();
     this.loggedInSource.next(false);
     this.isAdminSource.next(false);

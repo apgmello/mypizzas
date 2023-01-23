@@ -33,6 +33,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    sessionStorage.setItem('redirectTo','cart');
     this.router.navigate(['/checkout']);
   }
 

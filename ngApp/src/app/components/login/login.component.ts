@@ -1,6 +1,6 @@
 import { UserRegisterComponent } from './../user-register/user-register.component';
 import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -29,8 +29,20 @@ export class LoginComponent {
     });
     this.isAdminSubscription = this.authService.isAdminObservable.subscribe({
       next: (isAdmin) => {
-        if (!isAdmin && this.loggedIn) this.router.navigate(['/cart']);
-        else this.router.navigate(['/products']);
+        if (isAdmin) {
+          this.router.navigate(['/products']);
+          return;
+        }
+        else {
+          const redirectTo = sessionStorage.getItem('redirectTo');
+          sessionStorage.removeItem('redirectTo');
+          if(this.loggedIn && redirectTo) {
+            this.router.navigate([`/${redirectTo}`]);
+          }
+          else {
+            this.router.navigate(['/products']);
+          }
+        }
       },
     });
   }

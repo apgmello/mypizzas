@@ -2,7 +2,7 @@ import { NewProductComponent } from './../new-product/new-product.component';
 import { Subscription } from 'rxjs';
 import { CartService } from './../../services/cart.service';
 import { ProductService } from './../../services/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   products = new Array<Product>();
   isAdminSubscription: Subscription;
   isAdmin = false;
@@ -29,10 +29,6 @@ export class ProductsComponent implements OnInit {
       },
     });
     this.getProducts();
-  }
-
-  ngOnInit(): void {
-    this.authService.publishIsAdmin();
   }
 
   async getProducts() {

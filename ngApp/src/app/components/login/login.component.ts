@@ -17,12 +17,16 @@ export class LoginComponent {
   loggedInSubscription: Subscription;
   loggedIn = false;
 
-  constructor(private authService: AuthService, private router: Router,    private modalService: NgbModal) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
     this.loggedInSubscription = this.authService.loggedInObservable.subscribe({
       next: (loggedIn) => {
         this.loggedIn = loggedIn;
-      }
-    })
+      },
+    });
     this.isAdminSubscription = this.authService.isAdminObservable.subscribe({
       next: (isAdmin) => {
         if (!isAdmin && this.loggedIn) this.router.navigate(['/cart']);
@@ -35,8 +39,9 @@ export class LoginComponent {
     this.authService.loginUser(this.loginUserData);
   }
 
-  newUser(){
-    const modalRef = this.modalService.open(UserRegisterComponent, {backdrop: false});
-    modalRef.componentInstance.name = 'Bolinho';
+  newUser() {
+    this.modalService.open(UserRegisterComponent, {
+      backdrop: true,
+    });
   }
 }

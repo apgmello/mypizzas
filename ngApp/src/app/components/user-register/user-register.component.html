@@ -1,36 +1,42 @@
-<div class="modal-header">
-  <h4 class="modal-title">Cadastro</h4>
-</div>
-<div class="modal-body">
-  <div class="form-group">
-    <label for="">Email</label>
-    <input type="text" name="name" class="form-control rounded-0" required />
+
+  <div class="modal-header">
+    <h4 class="modal-title">Cadastro</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    ></button>  
   </div>
-
-  <div class="form-group">
-    <label for="">Senha</label>
-    <input
-      type="password"
-      name="password"
-      class="form-control rounded-0"
-      required
-    />
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="">Username</label>
+      <input name="blank_username_field" placeholder="Username" autocomplete="new-password"  type="text" class="form-control rounded-0" required  [(ngModel)]="user.username" />
+    </div>
+  
+    <div class="form-group">
+      <label for="">Senha</label>
+      <input
+        placeholder="Password"
+        type="password"
+        name="blank_password_field"
+        class="form-control rounded-0"
+        autocomplete="new-password" 
+        [(ngModel)]="user.password"
+        required
+      />
+    </div>
+  
+    <div class="btn-group me-3" *ngIf="isAdmin">
+      <input type="checkbox" [(ngModel)]="user.admin">&nbsp;Administrador
+    </div>
   </div>
-<!-- colocar *ngIf="isAdmin" pra poder cadastrar outro adm -->
-<div class="btn-group me-3">
-	<button type="button" class="btn btn-primary">Nível de acesso</button>
-	<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-		<button type="button" class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
-		<div class="dropdown-menu" ngbDropdownMenu>
-			<button ngbDropdownItem>Administrador</button>
-			<button ngbDropdownItem>Usuário comum</button>
-		</div>
-	</div>
-</div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="saveUser()">
+      Salvar
+    </button>
+  </div>
+ 
 
 
-<div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="saveUser()">
-    Salvar
-  </button>
-</div>

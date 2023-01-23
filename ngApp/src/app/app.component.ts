@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
     })
     this.isAdminSubscription = this.authService.isAdminObservable.subscribe({
       next: (isAdmin) => {
-        console.log(isAdmin)
         this.isAdmin = isAdmin;
       }
     })

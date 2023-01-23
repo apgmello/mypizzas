@@ -30,14 +30,28 @@
     [(ngModel)]="product.price"
   />
   <br />
-  <label for="">Foto</label>
-  <input
-    type="file"
-    name="imgUrl"
-    accept="Imagem"
-    class="form-control rounded-0"
-    required
-  />
+  <div class="form-group">
+    <fieldset class="form-group">
+
+        <label>Upload Logo</label>
+        {{imageError}}
+        <div class="custom-file fileInputProfileWrap">
+            <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+            <div class="img-space">
+
+                <ng-container *ngIf="isImageSaved; else elseTemplate">
+                    <img [src]="product.imgUrl" />
+                </ng-container>
+                <ng-template #elseTemplate>
+
+                    <img src="./../../assets/placeholder.png" class="img-responsive">
+                </ng-template>
+
+            </div>
+
+        </div>
+    </fieldset>
+</div>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-success" (click)="saveProduct()">

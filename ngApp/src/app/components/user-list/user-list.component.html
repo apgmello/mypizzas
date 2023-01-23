@@ -1,17 +1,30 @@
 <br />
-<h5>Lista de Usuários</h5>
+<h5>Usuários</h5>
+<div class="align-self-end">
+  <button class="btn btn-success float-right" (click)="newUser()">Adicionar Novo</button>
+</div>
+
+<br />
 <br />
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">🍕</th>
-      <th scope="col">id</th>
-      <th scope="col">Email</th>
+      <th scope="col">Username</th>
       <th scope="col">Nível de acesso</th>
-      <th scope="col">Excluir usuário</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-
+    <tr *ngFor="let user of users">
+      <td scope="col">{{user._id}}</td>
+      <td scope="col">{{user.username}}</td>
+      <td scope="col">{{user.admin ? "Administrador" : "Cliente"}}</td>
+      <td scope="col">
+        <button *ngIf="!user.admin" class="btn" alt="remover" (click)="removeUser(user._id)">
+          <span class="fa fa-close" style="color:red" alt="remover"></span>
+      </button>        
+      </td>
+    </tr>
   </tbody>
 </table>

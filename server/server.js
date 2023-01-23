@@ -7,14 +7,13 @@ const api = require('./routes/api');
 const app = express();
 app.use(cors());
 
-
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.use('/api', api);
 app.get('/', function (_req, res) {
-    res.send('oi eu sou seu servidor')
+    res.send('Hello from your Node Server!')
 });
 
 app.listen(port, function() {
-    console.log('servidor correndo localmente: ' + port)
+    console.log('Server online and running on port ' + port)
 });

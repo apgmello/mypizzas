@@ -13,6 +13,6 @@ export class CheckoutComponent {
 
   checkout(){
     this.cartService.clearCart();
-    this.router.navigate(['/']);
+    this.router.navigate(['/products']);
   }
 }

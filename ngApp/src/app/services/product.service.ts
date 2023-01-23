@@ -45,4 +45,21 @@ export class ProductService {
       });
     });
   }
+
+  delete(id: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.httpClient
+        .delete<boolean>(`${this._getProductsUrl}/${id}`, {
+          headers: this.authService.buildHeaders(),
+        })
+        .subscribe({
+          next: (response: boolean) => {
+            resolve(response);
+          },
+          error: (error) => {
+            reject(error);
+          },
+        });
+    });
+  }
 }

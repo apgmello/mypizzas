@@ -10,7 +10,7 @@ mongoose.connect(db, function (err) {
     if (err) {
         console.error('Error! ' + err);
     } else {
-        console.log('Você está conectada ao Mongão!');
+        console.log('Connected to Mongo!');
     }
 });
 
@@ -51,29 +51,48 @@ router.post('/products', verifyToken, (req, res) => {
     });
 })
 
-router.delete('/products', verifyToken, (req, res) =>{
+router.delete('/products/:id', verifyToken, (req, res) =>{
     if (!req.admin) {
         return res.status(401).send('Unauthorized request')
     }
 
-    let requestBody = req.body;
-    let productId = requestBody.id;
-
+    Product.findOne({id: req.params.id}, function(err, doc) {
+        if(!err) {
+            doc.remove();
+            res.status(200).send(true);
+            return;
+        }
+        res.status(404).send('Product not found');
+    });
 })
 
-router.post('/register', verifyToken, (req, res) => {
+router.post('/users', (req, res) => {
     let userData = req.body;
     let user = new User(userData);
     user.save((err, registeredUser) => {
         if (err) {
             console.log(err);
         } else {
-            let payload = { subject: registeredUser._id }
-            let token = jwt.sign(payload, 'ce656850400574e9f9cffb285ee8abc0');
-            res.status(200).send({ token });
+            res.status(200).send({ registeredUser });
         }
     })
 });
+
+router.delete('/users/:id', verifyToken, (req, res) =>{
+    if (!req.admin) {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    User.findOne({_id: req.params.id}, function(err, doc) {
+        if(!err) {
+            doc.remove();
+            res.status(200).send(true);
+            return;
+        }
+        res.status(404).send('User not found');
+    });
+})
+
 
 router.post('/login', (req, res) => {
     let userData = req.body
@@ -105,5 +124,17 @@ router.get('/products', (req, res) => {
         }
     });
 });
+
+router.get('/users', (req, res) => {
+    User.find({}, {}, (err, users) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).send(users);
+        }
+    });
+});
+
 
 module.exports = router;

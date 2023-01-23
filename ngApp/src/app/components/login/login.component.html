@@ -10,7 +10,7 @@
             <label for="">Email</label>
             <input
               [(ngModel)]="loginUserData.username"
-              name="username"
+              name="blank_username_field"
               type="text"
               class="form-control rounded-0"
               required
@@ -21,7 +21,7 @@
             <input
               type="password"
               [(ngModel)]="loginUserData.password"
-              name="password"
+              name="blank_username_field"
               class="form-control rounded-0"
               required
             />
@@ -34,7 +34,7 @@
             Login
           </button>
 
-          <button class="btn btn-success" (click)="newUser()">
+          <button class="btn btn-outline-primary" (click)="newUser()">
             Cadastrar-se
           </button>
         </form>

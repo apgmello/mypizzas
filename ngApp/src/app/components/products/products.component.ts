@@ -5,7 +5,7 @@ import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-products',
@@ -45,12 +45,19 @@ export class ProductsComponent implements OnInit {
 
   newProduct(){
     const modalRef = this.modalService.open(NewProductComponent, {backdrop: false});
-    modalRef.componentInstance.name = 'Bolinho';
+
+    modalRef.closed.subscribe({
+      next: (_) => {
+        this.getProducts();
+      }
+    })
   }
 
 
-  deleteProduct(product: Product) {
-
+  async deleteProduct(product: Product) {
+    this.productService.delete(product.id).then(_ => {
+      this.getProducts();
+    });
   }
 }
 
